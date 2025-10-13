@@ -1,4 +1,5 @@
 @import "tailwindcss";
+@plugin "daisyui";
 
 :root {
   --background: #ffffff;
@@ -12,15 +13,72 @@
   --font-mono: var(--font-geist-mono);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+@font-face {
+  font-family: "Ria";
+  src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/2410-1@1.0/RiaSans-ExtraBold.woff2")
+    format("woff2");
+  font-weight: normal;
+  font-display: swap;
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
+}
+
+.font-ria {
+  font-family: "Ria", sans-serif;
+}
+
+.shiny-btn {
+  position: relative;
+  margin-right: 8px;
+  font-weight: 500;
+  cursor: pointer;
+  overflow: hidden;
+  transition: background 0.2s ease;
+}
+
+.swiper-pagination-bullet {
+  background-color: var(--primary-color) !important; /* 활성화된 색 */
+  opacity: 1 !important;
+  width: 10px;
+  height: 10px;
+  margin: 6px 0 !important; /* 세로 간격 */
+  border-radius: 9999px; /* 둥근 모양 */
+  transition: all 0.3s ease;
+}
+
+.swiper-pagination-bullet-active {
+  background-color: var(--primary-color2) !important; /* 활성화된 색 */
+  width: 12px;
+  height: 12px;
+}
+
+/* 반짝 효과 레이어 */
+.shiny-btn::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -50%;
+  width: 25%;
+  height: 100%;
+  background: rgba(255, 255, 255, 0.4);
+  transform: skewX(-25deg);
+  animation: shine-move 1s ease-in-out 3 forwards; /* 👈 두 번만 실행 */
+}
+
+/* hover 시 발동 */
+.shiny-btn:hover::after {
+  animation: shine-move 0.8s ease-in-out forwards;
+}
+
+@keyframes shine-move {
+  0% {
+    left: -50%;
+  }
+  100% {
+    left: 120%;
+  }
 }
