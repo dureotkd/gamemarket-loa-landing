@@ -40,7 +40,7 @@ const keywords = [
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="en">
+    <html lang="ko" data-theme="dark">
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
@@ -63,18 +63,15 @@ export default function RootLayout({ children }) {
                 <span>거래목록</span>
                 <ChevronDown />
               </Link>
-              <ul
-                tabindex="-1"
-                className="dropdown-content menu bg-base-100 rounded-box w-52 p-2 shadow-sm"
-              >
+              <ul className="dropdown-content menu bg-base-100 rounded-box w-52 p-2 shadow-sm">
                 {keywords.map((item) => (
                   <li key={item.value}>
-                    <a
+                    <Link
                       href={item.href}
                       className="hover:text-yellow-400 transition-colors duration-200"
                     >
                       {item.label}
-                    </a>
+                    </Link>
                   </li>
                 ))}
               </ul>
@@ -90,12 +87,12 @@ export default function RootLayout({ children }) {
               <ul className="dropdown-content menu bg-base-100 rounded-box z-1 w-52 p-2 shadow-sm">
                 {keywords.map((item) => (
                   <li key={item.value}>
-                    <a
+                    <Link
                       href={item.href}
                       className="hover:text-yellow-400 transition-colors duration-200"
                     >
                       {item.label}
-                    </a>
+                    </Link>
                   </li>
                 ))}
               </ul>

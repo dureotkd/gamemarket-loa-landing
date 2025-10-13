@@ -49,13 +49,13 @@ export default function Home() {
             지금 로스트아크 아이템 거래를 통해
             <br /> 게임 경험을 한 단계 끌어올리세요
           </p>
-          <button
-            type="button"
+          <a
+            href="https://www.gamemarket.kr/page/trade?gm=14&sv=11&krgame=%EB%A1%9C%EC%8A%A4%ED%8A%B8%EC%95%84%ED%81%AC&krserver=%EC%A0%84%EC%B2%B4%EC%84%9C%EB%B2%84&type=sell"
             className="flex xl:text-lg shiny-btn justify-center gap-1 items-center cursor-pointer xl:min-w-[350px] text-lg bg-[#dea700] my-6 font-semibold px-8 py-3 transition text-black"
           >
             골드 거래하기
             <DollarSign size={20} className="mb-0.5" />
-          </button>
+          </a>
         </div>
 
         {/* 상품 박스 */}
@@ -325,7 +325,7 @@ export default function Home() {
             </p>
 
             <a
-              href="#"
+              href="https://www.gamemarket.kr/page/trade?gm=14&sv=11&krgame=%EB%A1%9C%EC%8A%A4%ED%8A%B8%EC%95%84%ED%81%AC&krserver=%EC%A0%84%EC%B2%B4%EC%84%9C%EB%B2%84&type=sell"
               className="inline-block bg-[#dea700] text-black font-semibold px-8 py-3 transition"
             >
               사이트 바로가기
