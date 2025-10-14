@@ -98,6 +98,10 @@ export default function RootLayout({ children }) {
         name="viewport"
         content="width=device-width, initial-scale=1.0, user-scalable=0"
       />
+      <meta
+        name="naver-site-verification"
+        content="28c53da9b72f75044881dfa8eede983a815cef51"
+      />
 
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
