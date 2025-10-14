@@ -55,7 +55,6 @@ function Content({ name = "" }) {
         ))}
       </section>
 
-      {/* 아이템땡스 장점 + 설명 */}
       <section className="xl:px-0 px-4 max-w-[1280px] mx-auto pb-20 gap-8">
         <div className="bg-[#171722] rounded-xl p-6 !w-full">
           <h3 className="text-[#dea700] font-semibold mb-4">게임마켓 장점</h3>

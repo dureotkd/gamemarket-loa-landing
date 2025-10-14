@@ -33,12 +33,12 @@ export const metadata = {
     "로아골드구매",
   ],
   alternates: {
-    canonical: "https://christmall.co.kr/",
+    canonical: "https://www.chanong.co.kr",
   },
   openGraph: {
     type: "website",
     locale: "ko_KR",
-    url: "https://christmall.co.kr/",
+    url: "https://www.chanong.co.kr",
     title: "로아골드거래소",
     description:
       "365일 24시간 빠르고 안전한 로아골드거래, 로아골드시세, 로스트아크골드거래, 로아현질, 로아골드구매",

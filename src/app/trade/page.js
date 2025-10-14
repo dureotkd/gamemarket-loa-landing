@@ -62,7 +62,7 @@ async function page() {
                     {item.type}
                   </span>
                   <p className="text-gray-200 font-semibold">{item.price}</p>
-                  <p className="text-left text-blue-400">최소 {item.min}</p>
+                  <p className="text-sm text-left text-blue-400">{item.min}</p>
                 </div>
               </div>
             </a>
