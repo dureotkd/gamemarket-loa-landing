@@ -4,6 +4,7 @@ import ScrollTopButton from "@/components/ScrollTopButton";
 import Image from "next/image";
 import Link from "next/link";
 import { ChevronDown, Menu } from "lucide-react";
+import { Analytics } from "@vercel/analytics/next";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -296,6 +297,7 @@ export default function RootLayout({ children }) {
 
           <ScrollTopButton />
         </footer>
+        <Analytics />
       </body>
     </html>
   );
