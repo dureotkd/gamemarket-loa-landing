@@ -24,7 +24,7 @@ function Content({ name = "" }) {
         <div className="relative max-w-[1280px] w-full mx-auto mt-12">
           <p className="text-sm text-gray-400 mb-2">
             <span className="text-gray-400">HOME</span>{" "}
-            <span className="text-[#dea700] ml-1">› {name}</span>
+            <h2 className="text-[#dea700] ml-1">› {name}</h2>
           </p>
           <h1 className="text-4xl font-bold">{name}</h1>
         </div>

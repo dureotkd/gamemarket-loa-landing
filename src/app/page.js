@@ -42,7 +42,7 @@ export default function Home() {
 
         {/* 메인 텍스트 */}
         <div className="relative z-10 mt-10 flex flex-col items-center">
-          <h2 className="text-2xl md:text-5xl font-ria font-extrabold mb-4 leading-snug">
+          <h2 className="text-xl lg:text-5xl font-ria font-extrabold mb-4 leading-snug">
             아이템 판매/구매를 안전하게 <br /> 효율적으로 거래하세요
           </h2>
           <p className="xl:text-lg text-sm text-gray-300">
@@ -51,7 +51,7 @@ export default function Home() {
           </p>
           <a
             href="https://www.gamemarket.kr/page/trade?gm=14&sv=11&krgame=%EB%A1%9C%EC%8A%A4%ED%8A%B8%EC%95%84%ED%81%AC&krserver=%EC%A0%84%EC%B2%B4%EC%84%9C%EB%B2%84&type=sell"
-            className="flex xl:text-lg shiny-btn justify-center gap-1 items-center cursor-pointer xl:min-w-[350px] text-lg bg-[#dea700] my-6 font-semibold px-8 py-3 transition text-black"
+            className="flex xl:text-lg shiny-btn justify-center gap-1 items-center cursor-pointer xl:min-w-[350px] text-sm bg-[#dea700] my-6 font-semibold px-8 py-3 transition text-black"
           >
             골드 거래하기
             <DollarSign size={20} className="mb-0.5" />

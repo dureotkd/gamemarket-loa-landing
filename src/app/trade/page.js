@@ -1,140 +1,11 @@
 import React from "react";
 
-function page() {
-  const trades = [
-    {
-      type: "팝니다",
-      title: "전섭 우편100:26골드 판매합니다/ 상시대기 중",
-      author: "ylooez",
-      game: "로스트아크",
-      server: "전체서버",
-      time: "4시간 전",
-      price: "1만 당 2,600원",
-      min: "최소 10만",
-      isVip: true,
-    },
-    {
-      type: "팝니다",
-      title: "▶▶ 바로OK ❤️구멍가게❤️ 최저 비율 ❤️ 골드 판매 ◀◀",
-      author: "구멍가게",
-      game: "로스트아크",
-      server: "전체서버",
-      time: "12분 전",
-      price: "1만 당 2,520원",
-      min: "최소 10만",
-      isVip: true,
-    },
-    {
-      type: "팝니다",
-      title: "⚡✪‿✪⚡전섭골드판매⚡가장빠른곳⚡즉시판매가능⚡24시⚡",
-      author: "구멍가게",
-      game: "로스트아크",
-      server: "전체서버",
-      time: "12분 전",
-      price: "1만 당 2,520원",
-      min: "최소 10만",
-      isVip: true,
-    },
-    {
-      type: "팝니다",
-      title: "⚡✪‿✪⚡전섭골드판매⚡가장빠른곳⚡즉시판매가능⚡24시⚡",
-      author: "구멍가게",
-      game: "로스트아크",
-      server: "전체서버",
-      time: "12분 전",
-      price: "1만 당 2,520원",
-      min: "최소 10만",
-      isVip: true,
-    },
-    {
-      type: "팝니다",
-      title: "⚡✪‿✪⚡전섭골드판매⚡가장빠른곳⚡즉시판매가능⚡24시⚡",
-      author: "구멍가게",
-      game: "로스트아크",
-      server: "전체서버",
-      time: "12분 전",
-      price: "1만 당 2,520원",
-      min: "최소 10만",
-      isVip: true,
-    },
-    {
-      type: "팝니다",
-      title: "⚡✪‿✪⚡전섭골드판매⚡가장빠른곳⚡즉시판매가능⚡24시⚡",
-      author: "구멍가게",
-      game: "로스트아크",
-      server: "전체서버",
-      time: "12분 전",
-      price: "1만 당 2,520원",
-      min: "최소 10만",
-      isVip: true,
-    },
-    {
-      type: "팝니다",
-      title: "▶▶ 바로OK ❤️구멍가게❤️ 최저 비율 ❤️ 골드 판매 ◀◀",
-      author: "구멍가게",
-      game: "로스트아크",
-      server: "전체서버",
-      time: "12분 전",
-      price: "1만 당 2,520원",
-      min: "최소 10만",
-      isVip: true,
-    },
-    {
-      type: "팝니다",
-      title: "▶▶ 바로OK ❤️구멍가게❤️ 최저 비율 ❤️ 골드 판매 ◀◀",
-      author: "구멍가게",
-      game: "로스트아크",
-      server: "전체서버",
-      time: "12분 전",
-      price: "1만 당 2,520원",
-      min: "최소 10만",
-      isVip: true,
-    },
-    {
-      type: "팝니다",
-      title: "▶▶ 바로OK ❤️구멍가게❤️ 최저 비율 ❤️ 골드 판매 ◀◀",
-      author: "구멍가게",
-      game: "로스트아크",
-      server: "전체서버",
-      time: "12분 전",
-      price: "1만 당 2,520원",
-      min: "최소 10만",
-      isVip: true,
-    },
-    {
-      type: "팝니다",
-      title: "▶▶ 바로OK ❤️구멍가게❤️ 최저 비율 ❤️ 골드 판매 ◀◀",
-      author: "구멍가게",
-      game: "로스트아크",
-      server: "전체서버",
-      time: "12분 전",
-      price: "1만 당 2,520원",
-      min: "최소 10만",
-      isVip: true,
-    },
-    {
-      type: "팝니다",
-      title: "▶▶ 바로OK ❤️구멍가게❤️ 최저 비율 ❤️ 골드 판매 ◀◀",
-      author: "구멍가게",
-      game: "로스트아크",
-      server: "전체서버",
-      time: "12분 전",
-      price: "1만 당 2,520원",
-      min: "최소 10만",
-      isVip: true,
-    },
-    {
-      type: "팝니다",
-      title: "▶▶ 바로OK ❤️구멍가게❤️ 최저 비율 ❤️ 골드 판매 ◀◀",
-      author: "구멍가게",
-      game: "로스트아크",
-      server: "전체서버",
-      time: "12분 전",
-      price: "1만 당 2,520원",
-      min: "최소 10만",
-      isVip: true,
-    },
-  ];
+async function page() {
+  // ✅ 서버에서 바로 실행됨
+  const res = await fetch("https://www.gamemarket.kr/api/trade", {
+    next: { revalidate: 60 }, // 60초 캐싱 (ISR)
+  });
+  const trades = await res.json();
 
   return (
     <main className="bg-[#0b0b13] min-h-screen text-white">
@@ -161,9 +32,12 @@ function page() {
       <div className="min-h-screen py-8">
         <div className="xl:px-0 px-4 max-w-[1280px] grid xl:grid-cols-2 grid-cols-1 gap-4 mx-auto space-y-3">
           {trades.map((item, i) => (
-            <div
+            <a
               key={i}
-              className="flex flex-col-reverse items-baseline m-0 justify-between bg-[#171722] rounded-lg border border-gray-700 p-6 hover:shadow-md transition"
+              href={
+                "https://www.gamemarket.kr/page/trade_detail?idx=" + item.idx
+              }
+              className="flex cursor-pointer flex-col-reverse items-baseline m-0 justify-between bg-[#171722] rounded-lg border border-gray-700 p-6 hover:shadow-md transition"
             >
               {/* 왼쪽 영역 */}
               <div className="flex-1">
@@ -188,10 +62,10 @@ function page() {
               <div className="flex items-baseline gap-2 min-w-[160px]">
                 <div className="flex items-center gap-2 text-right">
                   <p className="text-gray-200 font-semibold">{item.price}</p>
-                  <p className="text-left text-blue-400">{item.min}</p>
+                  <p className="text-left text-blue-400">최소 {item.min}</p>
                 </div>
               </div>
-            </div>
+            </a>
           ))}
         </div>
       </div>
