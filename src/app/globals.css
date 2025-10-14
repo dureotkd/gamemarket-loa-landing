@@ -31,6 +31,42 @@ body {
   font-family: "Ria", sans-serif;
 }
 
+.buy {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 2px 8px;
+  border: 1px solid #fca5a5;
+  background-color: #fee2e2;
+  color: #dc2626;
+  border-radius: 9999px;
+  font-size: 12px;
+  font-weight: 600;
+  min-width: 50px;
+}
+
+.sell {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 2px 8px;
+  border: 1px solid #93c5fd;
+  background-color: #dbeafe;
+  color: #3b82f6;
+  border-radius: 9999px;
+  font-size: 12px;
+  font-weight: 600;
+  min-width: 50px;
+}
+
+.collapse-title::after {
+  content: none !important;
+}
+
+.join-item {
+  border: none !important;
+}
+
 .shiny-btn {
   position: relative;
   margin-right: 8px;

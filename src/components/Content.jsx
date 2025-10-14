@@ -22,10 +22,10 @@ function Content({ name = "" }) {
         <div className="absolute inset-0 bg-black/60" />
 
         <div className="relative max-w-[1280px] w-full mx-auto mt-12">
-          <p className="text-sm text-gray-400 mb-2">
+          <div className="text-sm text-gray-400 mb-2">
             <span className="text-gray-400">HOME</span>{" "}
-            <h2 className="text-[#dea700] ml-1">› {name}</h2>
-          </p>
+            <h2 className="text-[#dea700] ml-1 inline-block">› {name}</h2>
+          </div>
           <h1 className="text-4xl font-bold">{name}</h1>
         </div>
       </section>
