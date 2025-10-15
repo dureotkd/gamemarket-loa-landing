@@ -106,7 +106,7 @@ export default function RootLayout({ children }) {
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        <header className="max-w-[1280px] mx-auto absolute top-0 left-1/2 transform -translate-x-1/2 w-full flex justify-between items-center py-6 z-10 px-7">
+        <header className="max-w-[1280px] mx-auto absolute top-0 left-1/2 transform -translate-x-1/2 w-full flex justify-between items-center py-6 z-10 px-7 lg:px-0">
           <nav className="drawer flex items-center gap-4 xl:hidden text-white">
             <input id="my-drawer-1" type="checkbox" className="drawer-toggle" />
             <div className="drawer-content">
