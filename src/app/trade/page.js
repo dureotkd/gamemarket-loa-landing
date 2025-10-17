@@ -7,6 +7,11 @@ async function page() {
   });
   const trades = await res.json();
 
+  // const res2 = await fetch("https://www.gamemarket.kr/api/server", {
+  //   next: { revalidate: 60 }, // 60초 캐싱 (ISR)
+  // });
+  // const serverList = await res2.json();
+
   return (
     <main className="bg-[#0b0b13] min-h-screen text-white">
       {/* 헤더 영역 */}
