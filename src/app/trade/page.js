@@ -1,43 +1,28 @@
+import ListScrollTopButton from "@/components/ListScrollTopButton";
 import { CircleCheck } from "lucide-react";
 import Link from "next/link";
 import React from "react";
 
 async function page({ searchParams }) {
-  const { sidx = "11", sort = "1" } = searchParams;
+  const { krserver = "전체서버", sort = "new" } = searchParams;
 
   // ✅ 서버에서 바로 실행됨
-  const res = await fetch("https://www.gamemarket.kr/api/trade", {
+  const res = await fetch(
+    `https://www.gamemarket.kr/api/trade?krserver=${krserver}&sort=${sort}`,
+    {
+      next: { revalidate: 60 }, // 60초 캐싱 (ISR)
+    }
+  );
+  console.log(res);
+  const trades = (await res?.json()) || [];
+
+  const res2 = await fetch("https://www.gamemarket.kr/api/server", {
     next: { revalidate: 60 }, // 60초 캐싱 (ISR)
   });
-  const trades = await res.json();
-
-  // const res2 = await fetch("https://www.gamemarket.kr/api/server", {
-  //   next: { revalidate: 60 }, // 60초 캐싱 (ISR)
-  // });
-  // const serverList = await res2.json();
+  const serverList = (await res2?.json()) || [];
   const sortList = [
-    { idx: 1, name: "최신순" },
-    { idx: 3, name: "가격낮은순" },
-  ];
-  const serverList = [
-    {
-      idx: 11,
-      status: 1,
-      gidx: 14,
-      sname: "전체서버",
-      sort: 1,
-      game_name: "로스트아크",
-      regdate: "2025-02-08 23:36:01",
-    },
-    {
-      idx: 12,
-      status: 1,
-      gidx: 14,
-      sname: "db서버",
-      sort: 1,
-      game_name: "로스트아크",
-      regdate: "2025-02-08 23:36:01",
-    },
+    { idx: "new", name: "최신순" },
+    { idx: "low", name: "가격낮은순" },
   ];
 
   return (
@@ -64,70 +49,77 @@ async function page({ searchParams }) {
 
       <div className="min-h-screen py-8">
         <div className="max-w-[1280px] xl:px-0 px-4 mx-auto mb-6 flex flex-col flex-wrap gap-4 items-start">
-          <div className="flex gap-2">
+          <div className="flex flex-wrap gap-2">
             {sortList.map((item) => (
               <Link
                 className="bg-[#171722] rounded-lg border border-gray-700 px-4 py-2 text-sm hover:bg-gray-800 transition flex items-center gap-2"
                 key={item.idx}
-                href={`/trade?sidx=${sidx}&sort=${item.idx}`}
+                href={`/trade?krserver=${krserver}&sort=${item.idx}`}
               >
                 {item.name}
                 {sort == item.idx ? <CircleCheck size={18} /> : null}
               </Link>
             ))}
           </div>
-          <div className="flex gap-2">
+          <div className="flex flex-wrap gap-2">
             {serverList.map((item) => (
               <Link
                 className="bg-[#171722] rounded-lg border border-gray-700 px-4 py-2 text-sm hover:bg-gray-800 transition flex items-center gap-2"
                 key={item.idx}
-                href={`/trade?sidx=${item.idx}&sort=${sort}`}
+                href={`/trade?krserver=${item.sname}&sort=${sort}`}
               >
                 {item.sname}
-                {sidx == item.idx ? <CircleCheck size={18} /> : null}
+                {krserver == item.sname ? <CircleCheck size={18} /> : null}
               </Link>
             ))}
           </div>
         </div>
 
         <div className="xl:px-0 px-4 max-w-[1280px] grid xl:grid-cols-2 grid-cols-1 gap-4 mx-auto space-y-3">
-          {trades.map((item, i) => (
-            <a
-              key={i}
-              href={
-                "https://www.gamemarket.kr/page/trade_detail?idx=" + item.idx
-              }
-              className="flex cursor-pointer flex-col-reverse items-baseline m-0 justify-between bg-[#171722] rounded-lg border border-gray-700 p-6 hover:shadow-md transition"
-            >
-              {/* 왼쪽 영역 */}
-              <div className="flex-1">
-                <div className="xl:flex-row xl:my-3 mt-3 mb-1 flex-col flex items-start gap-2">
-                  <span className="text-gray-200 lg:text-[16px] text-sm truncate xl:max-w-[420px] max-w-[300px] font-medium">
-                    {item.title}
-                  </span>
+          {trades.length === 0 ? (
+            <div className="col-span-2 text-center text-gray-400 py-12">
+              거래가 존재하지 않습니다.
+            </div>
+          ) : (
+            trades.map((item, i) => (
+              <a
+                key={i}
+                href={`https://www.gamemarket.kr/page/trade_detail?idx=${item.idx}`}
+                className="flex cursor-pointer flex-col-reverse items-baseline m-0 justify-between bg-[#171722] rounded-lg border border-gray-700 p-6 hover:shadow-md transition"
+              >
+                {/* 왼쪽 영역 */}
+                <div className="flex-1">
+                  <div className="xl:flex-row xl:my-3 mt-3 mb-1 flex-col flex items-start gap-2">
+                    <span className="text-gray-200 lg:text-[16px] text-sm truncate xl:max-w-[420px] max-w-[300px] font-medium">
+                      {item.title}
+                    </span>
+                  </div>
+                  <div className="text-sm text-gray-500 flex flex-wrap gap-1">
+                    <span>{item.author}</span>
+                    <span>· {item.game}</span>
+                    <span>· {item.server}</span>
+                    <span>· {item.time}</span>
+                  </div>
                 </div>
 
-                <div className="text-sm text-gray-500 flex flex-wrap gap-1">
-                  <span>{item.author}</span>
-                  <span>· {item.game}</span>
-                  <span>· {item.server}</span>
-                  <span>· {item.time}</span>
+                {/* 오른쪽 영역 */}
+                <div className="flex items-baseline gap-2 min-w-[160px]">
+                  <div className="flex items-center gap-2 text-right">
+                    <span className={item.type === "삽니다" ? "buy" : "sell"}>
+                      {item.type}
+                    </span>
+                    <p className="text-gray-200 font-semibold">{item.price}</p>
+                    <p className="text-sm text-left text-blue-400">
+                      {item.min}
+                    </p>
+                  </div>
                 </div>
-              </div>
-
-              {/* 오른쪽 영역 */}
-              <div className="flex items-baseline gap-2 min-w-[160px]">
-                <div className="flex items-center gap-2 text-right">
-                  <span className={item.type === "삽니다" ? "buy" : "sell"}>
-                    {item.type}
-                  </span>
-                  <p className="text-gray-200 font-semibold">{item.price}</p>
-                  <p className="text-sm text-left text-blue-400">{item.min}</p>
-                </div>
-              </div>
-            </a>
-          ))}
+              </a>
+            ))
+          )}
         </div>
+
+        <ListScrollTopButton />
       </div>
     </main>
   );
