@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+Sitemap: https://www.chanong.co.kr/sitemap.xml
+Sitemap: https://www.chanong.co.kr/sitemap-news.xml
