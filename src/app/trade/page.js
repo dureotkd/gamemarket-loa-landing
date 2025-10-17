@@ -1,6 +1,10 @@
+import { CircleCheck } from "lucide-react";
+import Link from "next/link";
 import React from "react";
 
-async function page() {
+async function page({ searchParams }) {
+  const { sidx = "11", sort = "1" } = searchParams;
+
   // ✅ 서버에서 바로 실행됨
   const res = await fetch("https://www.gamemarket.kr/api/trade", {
     next: { revalidate: 60 }, // 60초 캐싱 (ISR)
@@ -11,6 +15,30 @@ async function page() {
   //   next: { revalidate: 60 }, // 60초 캐싱 (ISR)
   // });
   // const serverList = await res2.json();
+  const sortList = [
+    { idx: 1, name: "최신순" },
+    { idx: 3, name: "가격낮은순" },
+  ];
+  const serverList = [
+    {
+      idx: 11,
+      status: 1,
+      gidx: 14,
+      sname: "전체서버",
+      sort: 1,
+      game_name: "로스트아크",
+      regdate: "2025-02-08 23:36:01",
+    },
+    {
+      idx: 12,
+      status: 1,
+      gidx: 14,
+      sname: "db서버",
+      sort: 1,
+      game_name: "로스트아크",
+      regdate: "2025-02-08 23:36:01",
+    },
+  ];
 
   return (
     <main className="bg-[#0b0b13] min-h-screen text-white">
@@ -35,6 +63,33 @@ async function page() {
       </section>
 
       <div className="min-h-screen py-8">
+        <div className="max-w-[1280px] mx-auto mb-6 flex flex-col flex-wrap gap-4 items-start">
+          <div className="flex gap-2">
+            {sortList.map((item) => (
+              <Link
+                className="bg-[#171722] rounded-lg border border-gray-700 px-4 py-2 text-sm hover:bg-gray-800 transition flex items-center gap-2"
+                key={item.idx}
+                href={`/trade?sidx=${sidx}&sort=${item.idx}`}
+              >
+                {item.name}
+                {sort == item.idx ? <CircleCheck size={18} /> : null}
+              </Link>
+            ))}
+          </div>
+          <div className="flex gap-2">
+            {serverList.map((item) => (
+              <Link
+                className="bg-[#171722] rounded-lg border border-gray-700 px-4 py-2 text-sm hover:bg-gray-800 transition flex items-center gap-2"
+                key={item.idx}
+                href={`/trade?sidx=${item.idx}&sort=${sort}`}
+              >
+                {item.sname}
+                {sidx == item.idx ? <CircleCheck size={18} /> : null}
+              </Link>
+            ))}
+          </div>
+        </div>
+
         <div className="xl:px-0 px-4 max-w-[1280px] grid xl:grid-cols-2 grid-cols-1 gap-4 mx-auto space-y-3">
           {trades.map((item, i) => (
             <a
