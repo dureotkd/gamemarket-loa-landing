@@ -63,7 +63,7 @@ async function page({ searchParams }) {
       </section>
 
       <div className="min-h-screen py-8">
-        <div className="max-w-[1280px] mx-auto mb-6 flex flex-col flex-wrap gap-4 items-start">
+        <div className="max-w-[1280px] xl:px-0 px-4 mx-auto mb-6 flex flex-col flex-wrap gap-4 items-start">
           <div className="flex gap-2">
             {sortList.map((item) => (
               <Link
