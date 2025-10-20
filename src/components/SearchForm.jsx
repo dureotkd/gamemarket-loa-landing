@@ -10,7 +10,9 @@ function SearchForm({ className, defaultAmount = "" }) {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (!amount) return;
+    if (!amount) {
+      params.delete("amount");
+    }
 
     // 기존 쿼리 파라미터 유지하면서 amount만 갱신
     const params = new URLSearchParams(window.location.search);
