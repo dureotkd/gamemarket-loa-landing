@@ -12,6 +12,7 @@ function SearchForm({ className, defaultAmount = "" }) {
     e.preventDefault();
     if (!amount) {
       params.delete("amount");
+      return;
     }
 
     // 기존 쿼리 파라미터 유지하면서 amount만 갱신
