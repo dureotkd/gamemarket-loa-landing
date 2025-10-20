@@ -1,28 +1,51 @@
 import ListScrollTopButton from "@/components/ListScrollTopButton";
+import NumberInput from "@/components/NumberInput";
+import SearchForm from "@/components/SearchForm";
 import { CircleCheck } from "lucide-react";
 import Link from "next/link";
 import React from "react";
+import { NumericFormat } from "react-number-format";
 
 async function page({ searchParams }) {
-  const { krserver = "전체서버", sort = "new" } = searchParams;
+  const {
+    krserver = "전체서버",
+    sort = "new",
+    amount = "",
+    gubun = "",
+  } = searchParams;
 
   // ✅ 서버에서 바로 실행됨
   const res = await fetch(
-    `https://www.gamemarket.kr/api/trade?krserver=${krserver}&sort=${sort}`,
+    `https://www.gamemarket.kr/api/trade?krserver=${krserver}&sort=${sort}&amount=${amount}&gubun=${gubun}`,
     {
       next: { revalidate: 60 }, // 60초 캐싱 (ISR)
     }
   );
-  console.log(res);
+
   const trades = (await res?.json()) || [];
 
   const res2 = await fetch("https://www.gamemarket.kr/api/server", {
     next: { revalidate: 60 }, // 60초 캐싱 (ISR)
   });
+
   const serverList = (await res2?.json()) || [];
   const sortList = [
     { idx: "new", name: "최신순" },
     { idx: "low", name: "가격낮은순" },
+  ];
+  const gubunList = [
+    {
+      idx: "",
+      name: "전체",
+    },
+    {
+      idx: "1",
+      name: "팝니다",
+    },
+    {
+      idx: "2",
+      name: "삽니다",
+    },
   ];
 
   return (
@@ -49,12 +72,25 @@ async function page({ searchParams }) {
 
       <div className="min-h-screen py-8">
         <div className="max-w-[1280px] xl:px-0 px-4 mx-auto mb-6 flex flex-col flex-wrap gap-4 items-start">
+          <SearchForm className="flex flex-wrap gap-2" defaultAmount={amount} />
+          <div className="flex flex-wrap gap-2">
+            {gubunList.map((item) => (
+              <Link
+                className="bg-[#171722] rounded-lg border border-gray-700 px-4 py-2 text-sm hover:bg-gray-800 transition flex items-center gap-2"
+                key={item.idx}
+                href={`/trade?krserver=${krserver}&sort=${sort}&amount=${amount}&gubun=${item.idx}`}
+              >
+                {item.name}
+                {gubun == item.idx ? <CircleCheck size={18} /> : null}
+              </Link>
+            ))}
+          </div>
           <div className="flex flex-wrap gap-2">
             {sortList.map((item) => (
               <Link
                 className="bg-[#171722] rounded-lg border border-gray-700 px-4 py-2 text-sm hover:bg-gray-800 transition flex items-center gap-2"
                 key={item.idx}
-                href={`/trade?krserver=${krserver}&sort=${item.idx}`}
+                href={`/trade?krserver=${krserver}&sort=${item.idx}&amount=${amount}&gubun=${gubun}`}
               >
                 {item.name}
                 {sort == item.idx ? <CircleCheck size={18} /> : null}
@@ -66,7 +102,7 @@ async function page({ searchParams }) {
               <Link
                 className="bg-[#171722] rounded-lg border border-gray-700 px-4 py-2 text-sm hover:bg-gray-800 transition flex items-center gap-2"
                 key={item.idx}
-                href={`/trade?krserver=${item.sname}&sort=${sort}`}
+                href={`/trade?krserver=${item.sname}&sort=${sort}&amount=${amount}&gubun=${gubun}`}
               >
                 {item.sname}
                 {krserver == item.sname ? <CircleCheck size={18} /> : null}
