@@ -1,11 +1,16 @@
+import { gameTitleMap } from "@/util/constants";
 import { ArrowRight } from "lucide-react";
 import Link from "next/link";
 import React from "react";
 
-async function NewsContent({ page = 1 }) {
-  const res = await fetch(`https://www.gamemarket.kr/api/news?page=${page}`, {
-    next: { revalidate: 60 }, // 60초 캐싱 (ISR)
-  });
+async function NewsContent({ page = 1, game = "" }) {
+  const gameName = gameTitleMap[game] || "";
+  const res = await fetch(
+    `https://www.gamemarket.kr/api/news?page=${page}&game_name=${gameName}`,
+    {
+      next: { revalidate: 60 }, // 60초 캐싱 (ISR)
+    }
+  );
   const news = await res.json();
   const recent_news = news.slice(0, 5); // 최근 게시물 5개
 
