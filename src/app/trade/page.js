@@ -17,7 +17,7 @@ async function page({ searchParams }) {
   } = searchParams;
 
   const res2 = await fetch("https://www.gamemarket.kr/api/server", {
-    next: { revalidate: 60 }, // 60초 캐싱 (ISR)
+    cache: "force-cache", // 무제한 캐싱
   });
 
   const serverList = (await res2?.json()) || [];
