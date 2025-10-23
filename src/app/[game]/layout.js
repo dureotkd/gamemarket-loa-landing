@@ -4,7 +4,7 @@ import { ChevronDown, Menu } from "lucide-react";
 
 // app/aion2/page.js
 export const metadata = {
-  title: "아이온2 거래소 | 빠르고 안전한 아이온2 아이템 거래",
+  title: "아이온2 키나거래소 | 빠르고 안전한 아이온2 아이템 거래",
   description:
     "아이온2 거래소 - 24시간 안전하고 빠른 아이온2 아이템, 키나, 계정 거래 플랫폼",
   keywords: [
@@ -35,10 +35,10 @@ export const metadata = {
     type: "website",
     locale: "ko_KR",
     url: "https://www.chanong.kr/aion2",
-    title: "아이온2 거래소",
+    title: "아이온2 키나거래소",
     description:
       "아이온2 거래소 - 24시간 안전하고 빠른 아이온2 아이템, 키나, 계정 거래 플랫폼",
-    siteName: "아이온2 거래소",
+    siteName: "아이온2 키나거래소",
     images: [
       {
         url: "https://www.gamemarket.kr/assets/app_hyup/images/gamemarket_og_image.png",
@@ -50,7 +50,7 @@ export const metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "아이온2 거래소",
+    title: "아이온2 키나거래소",
     description: "아이온2 아이템 거래, 안전한 거래 플랫폼",
     images: [
       "https://www.gamemarket.kr/assets/app_hyup/images/gamemarket_og_image.png",
