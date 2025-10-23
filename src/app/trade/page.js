@@ -1,9 +1,11 @@
+import FetchLoading from "@/components/FetchLoading";
 import ListScrollTopButton from "@/components/ListScrollTopButton";
 import NumberInput from "@/components/NumberInput";
 import SearchForm from "@/components/SearchForm";
+import TradeList from "@/components/TradeList";
 import { CircleCheck } from "lucide-react";
 import Link from "next/link";
-import React from "react";
+import React, { Suspense } from "react";
 import { NumericFormat } from "react-number-format";
 
 async function page({ searchParams }) {
@@ -13,16 +15,6 @@ async function page({ searchParams }) {
     amount = "",
     gubun = "",
   } = searchParams;
-
-  // ✅ 서버에서 바로 실행됨
-  const res = await fetch(
-    `https://www.gamemarket.kr/api/trade?krserver=${krserver}&sort=${sort}&amount=${amount}&gubun=${gubun}`,
-    {
-      next: { revalidate: 60 }, // 60초 캐싱 (ISR)
-    }
-  );
-
-  const trades = (await res?.json()) || [];
 
   const res2 = await fetch("https://www.gamemarket.kr/api/server", {
     next: { revalidate: 60 }, // 60초 캐싱 (ISR)
@@ -112,47 +104,12 @@ async function page({ searchParams }) {
         </div>
 
         <div className="xl:px-0 px-4 max-w-[1280px] grid xl:grid-cols-2 grid-cols-1 gap-4 mx-auto space-y-3">
-          {trades.length === 0 ? (
-            <div className="col-span-2 text-center text-gray-400 py-12">
-              거래가 존재하지 않습니다.
-            </div>
-          ) : (
-            trades.map((item, i) => (
-              <a
-                key={i}
-                href={`https://www.gamemarket.kr/page/trade_detail?idx=${item.idx}`}
-                className="flex cursor-pointer flex-col-reverse items-baseline m-0 justify-between bg-[#171722] rounded-lg border border-gray-700 p-6 hover:shadow-md transition"
-              >
-                {/* 왼쪽 영역 */}
-                <div className="flex-1">
-                  <div className="xl:flex-row xl:my-3 mt-3 mb-1 flex-col flex items-start gap-2">
-                    <span className="text-gray-200 lg:text-[16px] text-sm truncate xl:max-w-[420px] max-w-[300px] font-medium">
-                      {item.title}
-                    </span>
-                  </div>
-                  <div className="text-sm text-gray-500 flex flex-wrap gap-1">
-                    <span>{item.author}</span>
-                    <span>· {item.game}</span>
-                    <span>· {item.server}</span>
-                    <span>· {item.time}</span>
-                  </div>
-                </div>
-
-                {/* 오른쪽 영역 */}
-                <div className="flex items-baseline gap-2 min-w-[160px]">
-                  <div className="flex items-center gap-2 text-right">
-                    <span className={item.type === "삽니다" ? "buy" : "sell"}>
-                      {item.type}
-                    </span>
-                    <p className="text-gray-200 font-semibold">{item.price}</p>
-                    <p className="text-sm text-left text-blue-400">
-                      {item.min}
-                    </p>
-                  </div>
-                </div>
-              </a>
-            ))
-          )}
+          <Suspense fallback={<FetchLoading />}>
+            <TradeList
+              krgame="로스트아크"
+              searchParams={{ krserver, sort, amount, gubun }}
+            />
+          </Suspense>
         </div>
 
         <ListScrollTopButton />
