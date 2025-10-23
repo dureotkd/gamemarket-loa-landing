@@ -1,8 +1,11 @@
 import Content from "@/components/Content";
+import { gameTitleMap } from "@/util/constants";
 import React from "react";
 
-function page() {
-  return <Content name="로스트아크캐시" />;
+function page({ params }) {
+  const { game } = params;
+
+  return <Content name={`${gameTitleMap[game]}캐시`} />;
 }
 
 export default page;
