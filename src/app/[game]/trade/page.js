@@ -3,7 +3,7 @@ import ListScrollTopButton from "@/components/ListScrollTopButton";
 import NumberInput from "@/components/NumberInput";
 import SearchForm from "@/components/SearchForm";
 import TradeList from "@/components/TradeList";
-import { gameTitleMap } from "@/util/constants";
+import { gameCodeMap, gameTitleMap } from "@/util/constants";
 import { CircleCheck } from "lucide-react";
 import Link from "next/link";
 import React, { Suspense } from "react";
@@ -18,9 +18,12 @@ async function page({ searchParams, params }) {
     gubun = "",
   } = searchParams;
 
-  const res2 = await fetch("https://www.gamemarket.kr/api/server", {
-    next: { revalidate: 60 }, // 60초 캐싱 (ISR)
-  });
+  const res2 = await fetch(
+    `https://www.gamemarket.kr/api/server?gidx=${gameCodeMap[game]}`,
+    {
+      cache: "force-cache", // ✅ 빌드 시점 캐싱 (절대 다시 요청 안함)
+    }
+  );
 
   const serverList = (await res2?.json()) || [];
   const sortList = [
