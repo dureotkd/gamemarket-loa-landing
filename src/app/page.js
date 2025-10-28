@@ -1,3 +1,4 @@
+/* eslint-disable @next/next/no-html-link-for-pages */
 import { DollarSign } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
@@ -28,7 +29,11 @@ export default function Home() {
   ];
 
   const keywords = [
-    { label: "거래목록", value: "trade", href: "/trade" },
+    {
+      label: "거래목록",
+      value: "trade",
+      href: "https://www.gamemarket.kr/page/trade?gm=14&sv=11&krgame=%EB%A1%9C%EC%8A%A4%ED%8A%B8%EC%95%84%ED%81%AC&krserver=%EC%A0%84%EC%B2%B4%EC%84%9C%EB%B2%84&type=sell",
+    },
     { label: "로스트아크골드", value: "lostark-gold", href: "/lostark-gold" },
     { label: "로아골드", value: "loa-gold", href: "/loa-gold" },
     { label: "로아골드시세", value: "loa-gold-price", href: "/loa-gold-price" },
@@ -76,7 +81,9 @@ export default function Home() {
               <li className="join-item border border-base-300">
                 <details className="collapse collapse-arrow">
                   <summary className="collapse-title">
-                    <a href="/trade">거래목록</a>{" "}
+                    <a href="https://www.gamemarket.kr/page/trade?gm=14&sv=11&krgame=%EB%A1%9C%EC%8A%A4%ED%8A%B8%EC%95%84%ED%81%AC&krserver=%EC%A0%84%EC%B2%B4%EC%84%9C%EB%B2%84&type=sell">
+                      거래목록
+                    </a>{" "}
                     <ChevronDown className="inline-block ml-1" />
                   </summary>
                   <ul className="collapse-content text-sm pl-4">
@@ -96,7 +103,9 @@ export default function Home() {
               <li className="join-item border border-base-300">
                 <details className="collapse collapse-arrow">
                   <summary className="collapse-title">
-                    <a href="/trade">거래현황</a>{" "}
+                    <a href="https://www.gamemarket.kr/page/trade?gm=14&sv=11&krgame=%EB%A1%9C%EC%8A%A4%ED%8A%B8%EC%95%84%ED%81%AC&krserver=%EC%A0%84%EC%B2%B4%EC%84%9C%EB%B2%84&type=sell">
+                      거래현황
+                    </a>{" "}
                     <ChevronDown className="inline-block ml-1" />
                   </summary>
                   <ul className="collapse-content text-sm pl-4">
@@ -134,13 +143,13 @@ export default function Home() {
 
         <nav className="xl:flex hidden gap-10 text-lg !text-white">
           <div className="dropdown dropdown-bottom dropdown-end dropdown-hover text-white">
-            <Link
-              href="/trade"
+            <a
+              href="https://www.gamemarket.kr/page/trade?gm=14&sv=11&krgame=%EB%A1%9C%EC%8A%A4%ED%8A%B8%EC%95%84%ED%81%AC&krserver=%EC%A0%84%EC%B2%B4%EC%84%9C%EB%B2%84&type=sell"
               className="flex cursor-pointer items-center gap-1"
             >
               <span>거래목록</span>
               <ChevronDown />
-            </Link>
+            </a>
             <ul className="dropdown-content menu bg-base-100 rounded-box w-52 p-2 shadow-sm">
               {keywords.map((item) => (
                 <li key={item.value}>
@@ -155,13 +164,13 @@ export default function Home() {
             </ul>
           </div>
           <div className="dropdown dropdown-bottom dropdown-end dropdown-hover">
-            <Link
-              href="/trade"
+            <a
+              href="https://www.gamemarket.kr/page/trade?gm=14&sv=11&krgame=%EB%A1%9C%EC%8A%A4%ED%8A%B8%EC%95%84%ED%81%AC&krserver=%EC%A0%84%EC%B2%B4%EC%84%9C%EB%B2%84&type=sell"
               className="flex cursor-pointer items-center gap-1"
             >
               <span>거래현황</span>
               <ChevronDown />
-            </Link>
+            </a>
             <ul className="dropdown-content menu bg-base-100 rounded-box z-1 w-52 p-2 shadow-sm">
               {keywords.map((item) => (
                 <li key={item.value}>
@@ -199,13 +208,13 @@ export default function Home() {
               지금 로스트아크 아이템 거래를 통해
               <br /> 게임 경험을 한 단계 끌어올리세요
             </p>
-            <Link
-              href="/trade"
+            <a
+              href="https://www.gamemarket.kr/page/trade?gm=14&sv=11&krgame=%EB%A1%9C%EC%8A%A4%ED%8A%B8%EC%95%84%ED%81%AC&krserver=%EC%A0%84%EC%B2%B4%EC%84%9C%EB%B2%84&type=sell"
               className="flex xl:text-lg shiny-btn justify-center gap-1 items-center cursor-pointer xl:min-w-[350px] text-sm bg-[#dea700] my-6 font-semibold px-8 py-3 transition text-black"
             >
               골드 거래하기
               <DollarSign size={20} className="mb-0.5" />
-            </Link>
+            </a>
           </div>
 
           {/* 상품 박스 */}

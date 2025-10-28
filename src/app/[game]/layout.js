@@ -72,7 +72,12 @@ export default function layout({ children, params }) {
 
   const keywords = {
     aion2: [
-      { label: "거래목록", value: "trade", href: `/${game}/trade` },
+      // { label: "거래목록", value: "trade", href: `https://www.gamemarket.kr/page/trade?gm=14&sv=11&krgame=%EB%A1%9C%EC%8A%A4%ED%8A%B8%EC%95%84%ED%81%AC&krserver=%EC%A0%84%EC%B2%B4%EC%84%9C%EB%B2%84&type=sell` },
+      {
+        label: "거래목록",
+        value: "trade",
+        href: `https://www.gamemarket.kr/page/trade?gm=14&sv=11&krgame=%EB%A1%9C%EC%8A%A4%ED%8A%B8%EC%95%84%ED%81%AC&krserver=%EC%A0%84%EC%B2%B4%EC%84%9C%EB%B2%84&type=sell`,
+      },
       { label: "아이온2키나", value: "gold", href: `/${game}/gold` },
       {
         label: "아이온2키나거래",
@@ -133,7 +138,11 @@ export default function layout({ children, params }) {
               <li className="join-item border border-base-300">
                 <details className="collapse collapse-arrow">
                   <summary className="collapse-title">
-                    <a href={`/${game}/trade`}>거래목록</a>{" "}
+                    <a
+                      href={`https://www.gamemarket.kr/page/trade?gm=14&sv=11&krgame=%EB%A1%9C%EC%8A%A4%ED%8A%B8%EC%95%84%ED%81%AC&krserver=%EC%A0%84%EC%B2%B4%EC%84%9C%EB%B2%84&type=sell`}
+                    >
+                      거래목록
+                    </a>{" "}
                     <ChevronDown className="inline-block ml-1" />
                   </summary>
                   <ul className="collapse-content text-sm pl-4">
@@ -153,7 +162,11 @@ export default function layout({ children, params }) {
               <li className="join-item border border-base-300">
                 <details className="collapse collapse-arrow">
                   <summary className="collapse-title">
-                    <a href={`/${game}/trade`}>거래현황</a>{" "}
+                    <a
+                      href={`https://www.gamemarket.kr/page/trade?gm=14&sv=11&krgame=%EB%A1%9C%EC%8A%A4%ED%8A%B8%EC%95%84%ED%81%AC&krserver=%EC%A0%84%EC%B2%B4%EC%84%9C%EB%B2%84&type=sell`}
+                    >
+                      거래현황
+                    </a>{" "}
                     <ChevronDown className="inline-block ml-1" />
                   </summary>
                   <ul className="collapse-content text-sm pl-4">
@@ -195,7 +208,7 @@ export default function layout({ children, params }) {
         <nav className="xl:flex hidden gap-10 text-lg !text-white">
           <div className="dropdown dropdown-bottom dropdown-end dropdown-hover text-white">
             <Link
-              href={`/${game}/trade`}
+              href={`https://www.gamemarket.kr/page/trade?gm=14&sv=11&krgame=%EB%A1%9C%EC%8A%A4%ED%8A%B8%EC%95%84%ED%81%AC&krserver=%EC%A0%84%EC%B2%B4%EC%84%9C%EB%B2%84&type=sell`}
               className="flex cursor-pointer items-center gap-1"
             >
               <span>거래목록</span>
@@ -216,7 +229,7 @@ export default function layout({ children, params }) {
           </div>
           <div className="dropdown dropdown-bottom dropdown-end dropdown-hover">
             <Link
-              href={`/${game}/trade`}
+              href={`https://www.gamemarket.kr/page/trade?gm=14&sv=11&krgame=%EB%A1%9C%EC%8A%A4%ED%8A%B8%EC%95%84%ED%81%AC&krserver=%EC%A0%84%EC%B2%B4%EC%84%9C%EB%B2%84&type=sell`}
               className="flex cursor-pointer items-center gap-1"
             >
               <span>거래현황</span>

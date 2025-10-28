@@ -53,7 +53,7 @@ export default function Aion2Page({ params }) {
             <br /> 게임 경험을 한 단계 끌어올리세요
           </p>
           <Link
-            href={`/${game}/trade`}
+            href={`https://www.gamemarket.kr/page/trade?gm=64&sv=310&krgame=%EC%95%84%EC%9D%B4%EC%98%A82&krserver=%EC%A0%84%EC%B2%B4%EC%84%9C%EB%B2%84&type=sell`}
             className="flex xl:text-lg shiny-btn justify-center gap-1 items-center cursor-pointer xl:min-w-[350px] text-sm bg-[#dea700] my-6 font-semibold px-8 py-3 transition text-black"
           >
             키나 거래하기

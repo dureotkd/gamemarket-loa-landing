@@ -87,7 +87,7 @@ async function page({ searchParams, params }) {
               <Link
                 className="bg-[#171722] rounded-lg border border-gray-700 px-4 py-2 text-sm hover:bg-gray-800 transition flex items-center gap-2"
                 key={item.idx}
-                href={`/${game}/trade?krserver=${krserver}&sort=${item.idx}&amount=${amount}&gubun=${gubun}`}
+                href={`https://www.gamemarket.kr/page/trade?gm=64&sv=310&krgame=%EC%95%84%EC%9D%B4%EC%98%A82&krserver=%EC%A0%84%EC%B2%B4%EC%84%9C%EB%B2%84&type=sell`}
               >
                 {item.name}
                 {sort == item.idx ? <CircleCheck size={18} /> : null}
@@ -99,7 +99,7 @@ async function page({ searchParams, params }) {
               <Link
                 className="bg-[#171722] rounded-lg border border-gray-700 px-4 py-2 text-sm hover:bg-gray-800 transition flex items-center gap-2"
                 key={item.idx}
-                href={`/${game}/trade?krserver=${item.sname}&sort=${sort}&amount=${amount}&gubun=${gubun}`}
+                href={`https://www.gamemarket.kr/page/trade?gm=64&sv=310&krgame=%EC%95%84%EC%9D%B4%EC%98%A82&krserver=%EC%A0%84%EC%B2%B4%EC%84%9C%EB%B2%84&type=sell`}
               >
                 {item.sname}
                 {krserver == item.sname ? <CircleCheck size={18} /> : null}
