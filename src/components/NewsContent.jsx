@@ -4,15 +4,40 @@ import Link from "next/link";
 import React from "react";
 
 async function NewsContent({ page = 1, game = "" }) {
-  const gameName = gameTitleMap[game] || "";
-  const res = await fetch(
-    `https://www.gamemarket.kr/api/news?page=${page}&game_name=${gameName}`,
-    {
-      next: { revalidate: 60 }, // 60초 캐싱 (ISR)
+  const gameName = gameTitleMap[game] ?? "";
+  const url = `https://www.gamemarket.kr/api/news?page=${page}&game_name=${encodeURIComponent(
+    gameName
+  )}`;
+
+  let news = [];
+
+  try {
+    const res = await fetch(url, {
+      next: { revalidate: 60 },
+      headers: {
+        Accept: "application/json",
+        "User-Agent": "Mozilla/5.0 (Next.js prerender)", // 일부 서버에서 User-Agent 없으면 HTML 반환
+      },
+    });
+
+    const contentType = res.headers.get("content-type") || "";
+
+    // 🔹 JSON 아닌 경우 대비
+    if (!contentType.includes("application/json")) {
+      const text = await res.text();
+      console.error("❌ JSON이 아닌 응답:", text.slice(0, 200));
+      throw new Error(`API 응답이 JSON이 아님 (${res.status})`);
     }
-  );
-  const news = await res.json();
-  const recent_news = news.slice(0, 5); // 최근 게시물 5개
+
+    news = await res.json();
+  } catch (error) {
+    console.error("🚨 뉴스 API 요청 실패:", error.message);
+    // 🔹 빌드 중단 방지용 fallback
+    news = [];
+  }
+
+  // ✅ 안전하게 recent_news 계산
+  const recent_news = Array.isArray(news) ? news.slice(0, 5) : [];
 
   return (
     <main className="bg-[#0b0b13] min-h-screen text-white">
