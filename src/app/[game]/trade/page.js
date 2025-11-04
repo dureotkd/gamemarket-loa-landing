@@ -19,13 +19,18 @@ async function page({ searchParams, params }) {
   } = searchParams;
 
   const res2 = await fetch(
-    `https://www.gamemarket.kr/api/server?gidx=${gameCodeMap[game]}`,
-    {
-      cache: "force-cache", // ✅ 빌드 시점 캐싱 (절대 다시 요청 안함)
-    }
-  );
+    `https://www.gamemarket.kr/api/server?gidx=${gameCodeMap[game]}`
+  )
+    .then(async (res) => {
+      console.log("Content-Type:", res.headers.get("content-type"));
+      const text = await res.text();
+      return JSON.parse(text);
+    })
+    .catch((error) => {
+      console.error("Fetch error:", error);
+    });
 
-  const serverList = (await res2?.json()) || [];
+  const serverList = res2 || [];
   const sortList = [
     { idx: "new", name: "최신순" },
     { idx: "low", name: "가격낮은순" },

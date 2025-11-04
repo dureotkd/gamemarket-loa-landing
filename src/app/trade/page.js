@@ -16,11 +16,17 @@ async function page({ searchParams }) {
     gubun = "",
   } = searchParams;
 
-  const res2 = await fetch("https://www.gamemarket.kr/api/server", {
-    cache: "force-cache", // 무제한 캐싱
-  });
+  const res2 = await fetch("https://www.gamemarket.kr/api/server")
+    .then(async (res) => {
+      console.log("Content-Type:", res.headers.get("content-type"));
+      const text = await res.text();
+      return JSON.parse(text);
+    })
+    .catch((error) => {
+      console.error("Fetch error:", error);
+    });
 
-  const serverList = (await res2?.json()) || [];
+  const serverList = res2;
   const sortList = [
     { idx: "new", name: "최신순" },
     { idx: "low", name: "가격낮은순" },
@@ -44,7 +50,7 @@ async function page({ searchParams }) {
     <main className="bg-[#0b0b13] min-h-screen text-white">
       {/* 헤더 영역 */}
       <section
-        className="relative h-[300px] flex flex-col justify-center px-6 lg:px-20"
+        className="relative h-[18.75rem] flex flex-col justify-center px-6 lg:px-20"
         style={{
           backgroundImage: "url('/back2.webp')", // 👈 배경 은은한 별 이미지 (public 폴더에)
           backgroundSize: "cover",
@@ -53,7 +59,7 @@ async function page({ searchParams }) {
       >
         <div className="absolute inset-0 bg-black/60" />
 
-        <div className="relative max-w-[1280px] w-full mx-auto mt-12">
+        <div className="relative max-w-[80rem] w-full mx-auto mt-12">
           <p className="text-sm text-gray-400 mb-2">
             <span className="text-gray-400">HOME</span>{" "}
             <span className="text-[#dea700] ml-1">› 거래목록</span>
@@ -63,7 +69,7 @@ async function page({ searchParams }) {
       </section>
 
       <div className="min-h-screen py-8">
-        <div className="max-w-[1280px] xl:px-0 px-4 mx-auto mb-6 flex flex-col flex-wrap gap-4 items-start">
+        <div className="max-w-[80rem] xl:px-0 px-4 mx-auto mb-6 flex flex-col flex-wrap gap-4 items-start">
           <SearchForm className="flex flex-wrap gap-2" defaultAmount={amount} />
           <div className="flex flex-wrap gap-2">
             {gubunList.map((item) => (
@@ -103,7 +109,7 @@ async function page({ searchParams }) {
           </div>
         </div>
 
-        <div className="xl:px-0 px-4 max-w-[1280px] grid xl:grid-cols-2 grid-cols-1 gap-4 mx-auto space-y-3">
+        <div className="xl:px-0 px-4 max-w-[80rem] grid xl:grid-cols-2 grid-cols-1 gap-4 mx-auto space-y-3">
           <Suspense fallback={<FetchLoading />}>
             <TradeList
               krgame="로스트아크"
