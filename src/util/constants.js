@@ -9,9 +9,9 @@ export const gameTitleMap = {
 // trade?gm=15&sv=112&krgame=메이플스토리&krserver=전체서버&type=sell
 export const gameCodeMap = {
   aion2: 64,
-  land: 3, // TODO: 실제 게임 코드로 업데이트 필요
+  land: 3,
   sp: 17,
-  dp: 16, // TODO: 실제 게임 코드로 업데이트 필요
+  dp: 16,
   lostark: 14,
 };
 
