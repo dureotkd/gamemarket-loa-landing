@@ -1,11 +1,14 @@
 import { DollarSign } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
+import { gamePageConfig, gameTradeUrl } from "@/util/constants";
 
-export default function Aion2Page({ params }) {
+export default function GamePage({ params }) {
   const { game } = params;
 
-  console.log(game);
+  // 게임별 설정 가져오기 (없으면 aion2 기본값)
+  const config = gamePageConfig[game] || gamePageConfig.aion2;
+  const tradeUrl = gameTradeUrl[game] || gameTradeUrl.aion2;
 
   const characters = Array.from({ length: 6 }, (_, i) => `/cha${i + 1}.webp`);
   const items = Array.from({ length: 5 }, (_, i) => `/item${i + 1}.webp`);
@@ -13,15 +16,7 @@ export default function Aion2Page({ params }) {
     img: `/icon${i + 1}.webp`,
   }));
 
-  const stats = [
-    { title: "아이온2키나", percent: 30.0 },
-    { title: "아이온2키나", percent: 9.5 },
-    { title: "아이온2키나시세", percent: 10.0 },
-    { title: "아이온2키나판매", percent: 12.0 },
-    { title: "아이온2키나구매", percent: 16.33 },
-    { title: "아이온2현질", percent: 16.33 },
-    { title: "아이온2누적현질", percent: 30.0 },
-  ];
+  const stats = config.stats;
 
   const bottomStats = [
     { value: "386", label: "판매중인 아이템" },
@@ -36,7 +31,7 @@ export default function Aion2Page({ params }) {
       <section
         className="bg-center z-1 relative h-[100vh] flex flex-col items-center justify-center text-center overflow-hidden"
         style={{
-          backgroundImage: "url('/aion2/1.png')", // 👈 public 폴더에 배경 이미지 넣기
+          backgroundImage: `url('${config.heroImage}')`,
           backgroundSize: "cover",
         }}
       >
@@ -46,17 +41,17 @@ export default function Aion2Page({ params }) {
         {/* 메인 텍스트 */}
         <div className="relative z-10 mt-10 flex flex-col items-center">
           <h2 className="text-xl lg:text-5xl font-ria font-extrabold mb-4 leading-snug">
-            아이템 판매/구매를 안전하게 <br /> 효율적으로 거래하세요
+            {config.heroTitle} <br /> 효율적으로 거래하세요
           </h2>
           <p className="xl:text-lg text-sm text-gray-300">
-            지금 아이온2 아이템 거래를 통해
-            <br /> 게임 경험을 한 단계 끌어올리세요
+            {config.heroSubtitle}
+            <br /> {config.heroDescription}
           </p>
           <Link
-            href={`https://www.gamemarket.kr/page/trade?gm=64&sv=310&krgame=%EC%95%84%EC%9D%B4%EC%98%A82&krserver=%EC%A0%84%EC%B2%B4%EC%84%9C%EB%B2%84&type=sell`}
+            href={tradeUrl}
             className="flex xl:text-lg shiny-btn justify-center gap-1 items-center cursor-pointer xl:min-w-[350px] text-sm bg-[#dea700] my-6 font-semibold px-8 py-3 transition text-black"
           >
-            키나 거래하기
+            {config.tradeButtonText}
             <DollarSign size={20} className="mb-0.5" />
           </Link>
         </div>
@@ -66,13 +61,13 @@ export default function Aion2Page({ params }) {
           <div className="flex items-center gap-4">
             <Image
               src="/2.webp"
-              alt="아이온2키나"
+              alt={config.productAlt}
               width={80}
               height={80}
               className=""
             />
             <div>
-              <h3 className="text-xl font-semibold">아이온2키나 거래소</h3>
+              <h3 className="text-xl font-semibold">{config.productTitle}</h3>
               <p className="text-gray-400 text-left text-sm">가격 : ₩1.50</p>
             </div>
           </div>
@@ -200,7 +195,7 @@ export default function Aion2Page({ params }) {
         <div className="max-w-6xl mx-auto px-6">
           {/* 제목 */}
           <h3 className="text-blue-400 text-sm font-semibold tracking-widest">
-            아이온2 아이템거래
+            {config.statsTitle}
           </h3>
           <h2 className="text-4xl font-bold mt-2 mb-10">통계비율</h2>
 
@@ -260,7 +255,9 @@ export default function Aion2Page({ params }) {
           <p className="text-blue-400 text-sm font-semibold tracking-widest">
             팀 멤버
           </p>
-          <h2 className="text-4xl md:text-5xl font-bold mt-3">아이온2 랭킹</h2>
+          <h2 className="text-4xl md:text-5xl font-bold mt-3">
+            {config.rankingTitle}
+          </h2>
         </div>
 
         {/* 그리드 */}
@@ -326,7 +323,7 @@ export default function Aion2Page({ params }) {
             </p>
 
             <a
-              href="https://www.gamemarket.kr/page/trade?gm=64&sv=310&krgame=%EC%95%84%EC%9D%B4%EC%98%A82&krserver=%EC%A0%84%EC%B2%B4%EC%84%9C%EB%B2%84&type=sell"
+              href={tradeUrl}
               className="inline-block bg-[#dea700] text-black font-semibold px-8 py-3 transition"
             >
               사이트 바로가기
