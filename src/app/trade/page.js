@@ -5,6 +5,7 @@ import SearchForm from "@/components/SearchForm";
 import TradeList from "@/components/TradeList";
 import { gameTitleMap } from "@/util/constants";
 import { CircleCheck } from "lucide-react";
+import Image from "next/image";
 import Link from "next/link";
 import React, { Suspense } from "react";
 import { NumericFormat } from "react-number-format";
@@ -121,6 +122,22 @@ async function page({ searchParams }) {
 
         <ListScrollTopButton />
       </div>
+
+      {/* 카카오톡 오픈채팅 버튼 (오른쪽 하단 고정) */}
+      <a
+        href="https://open.kakao.com/o/syhfWH9h"
+        target="_blank"
+        rel="noopener noreferrer"
+        className="fixed !rounded-full bottom-6 right-6 z-50 overflow-hidden"
+      >
+        <Image
+          src="/kakao-talk-button-default.svg"
+          alt="카카오톡 문의하기"
+          width={84}
+          height={48}
+          className="xl:w-[84px] xl:h-[48px] w-[64px] h-[36px]"
+        />
+      </a>
     </main>
   );
 }
