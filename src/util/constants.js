@@ -1,8 +1,8 @@
 export const gameTitleMap = {
   aion2: "아이온2",
-  land: "메이플랜드",
-  sp: "서든",
-  dp: "던파",
+  land: "메이플스토리월드",
+  sp: "서든어택",
+  dp: "던전앤파이터",
   lostark: "로스트아크",
 };
 
@@ -131,11 +131,10 @@ export const gameMetadata = {
 
 // 게임별 거래목록 기본 URL
 export const gameTradeUrl = {
-  aion2:
-    "https://www.gamemarket.kr/page/trade?gm=64&sv=310&krgame=아이온2&krserver=전체서버&type=sell",
-  land: `https://www.gamemarket.kr/page/trade?gm=${gameCodeMap.land}&sv=9&krgame=메이플스토리월드&krserver=메이플랜드&type=sell`,
-  sp: `https://www.gamemarket.kr/page/trade?gm=${gameCodeMap.sp}&sv=0&krgame=서든어택&krserver=전체서버&type=sell`,
-  dp: `https://www.gamemarket.kr/page/trade?gm=${gameCodeMap.dp}&sv=36&krgame=던전앤파이터&krserver=전체서버&type=sell`,
+  aion2: "/trade?gidx=64&krgame=아이온2&game=aion2",
+  land: "/trade?gidx=3&krgame=메이플스토리월드&game=land",
+  sp: "/trade?gidx=17&krgame=서든어택&game=sp",
+  dp: "/trade?gidx=16&krgame=던전앤파이터&game=dp",
 };
 
 // 게임별 네비게이션 키워드 설정

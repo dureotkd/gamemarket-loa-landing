@@ -3,22 +3,29 @@ import ListScrollTopButton from "@/components/ListScrollTopButton";
 import NumberInput from "@/components/NumberInput";
 import SearchForm from "@/components/SearchForm";
 import TradeList from "@/components/TradeList";
+import { gameTitleMap } from "@/util/constants";
 import { CircleCheck } from "lucide-react";
 import Link from "next/link";
 import React, { Suspense } from "react";
 import { NumericFormat } from "react-number-format";
 
 async function page({ searchParams }) {
+  const params = await searchParams;
   const {
     krserver = "전체서버",
     sort = "new",
     amount = "",
     gubun = "",
-  } = searchParams;
+    gidx = "14",
+    game = "lostark",
+  } = params;
 
-  const res2 = await fetch("https://www.gamemarket.kr/api/server", {
-    cache: "force-cache", // 무제한 캐싱
-  });
+  const res2 = await fetch(
+    `https://www.gamemarket.kr/api/server?gidx=${gidx}`,
+    {
+      cache: "force-cache", // 무제한 캐싱
+    }
+  );
 
   const serverList = (await res2?.json()) || [];
   const sortList = [
@@ -70,7 +77,7 @@ async function page({ searchParams }) {
               <Link
                 className="bg-[#171722] rounded-lg border border-gray-700 px-4 py-2 text-sm hover:bg-gray-800 transition flex items-center gap-2"
                 key={item.idx}
-                href={`/trade?krserver=${krserver}&sort=${sort}&amount=${amount}&gubun=${item.idx}`}
+                href={`/trade?krserver=${krserver}&sort=${sort}&amount=${amount}&gubun=${item.idx}&game=${game}&gidx=${gidx}`}
               >
                 {item.name}
                 {gubun == item.idx ? <CircleCheck size={18} /> : null}
@@ -82,7 +89,7 @@ async function page({ searchParams }) {
               <Link
                 className="bg-[#171722] rounded-lg border border-gray-700 px-4 py-2 text-sm hover:bg-gray-800 transition flex items-center gap-2"
                 key={item.idx}
-                href={`/trade?krserver=${krserver}&sort=${item.idx}&amount=${amount}&gubun=${gubun}`}
+                href={`/trade?krserver=${krserver}&sort=${item.idx}&amount=${amount}&gubun=${gubun}&game=${game}&gidx=${gidx}`}
               >
                 {item.name}
                 {sort == item.idx ? <CircleCheck size={18} /> : null}
@@ -94,7 +101,7 @@ async function page({ searchParams }) {
               <Link
                 className="bg-[#171722] rounded-lg border border-gray-700 px-4 py-2 text-sm hover:bg-gray-800 transition flex items-center gap-2"
                 key={item.idx}
-                href={`/trade?krserver=${item.sname}&sort=${sort}&amount=${amount}&gubun=${gubun}`}
+                href={`/trade?krserver=${item.sname}&sort=${sort}&amount=${amount}&gubun=${gubun}&game=${game}&gidx=${gidx}`}
               >
                 {item.sname}
                 {krserver == item.sname ? <CircleCheck size={18} /> : null}
@@ -106,7 +113,7 @@ async function page({ searchParams }) {
         <div className="xl:px-0 px-4 max-w-[1280px] grid xl:grid-cols-2 grid-cols-1 gap-4 mx-auto space-y-3">
           <Suspense fallback={<FetchLoading />}>
             <TradeList
-              krgame="로스트아크"
+              krgame={gameTitleMap[game]}
               searchParams={{ krserver, sort, amount, gubun }}
             />
           </Suspense>

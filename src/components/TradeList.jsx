@@ -9,12 +9,13 @@ async function TradeList({
     gubun = "",
   },
 }) {
+  console.log(krgame, krserver, sort, amount, gubun);
   // ✅ 서버에서 바로 실행됨
   const res = await fetch(
-    `https://www.gamemarket.kr/api/trade?krgame=${krgame}&krserver=${krserver}&sort=${sort}&amount=${amount}&gubun=${gubun}`,
-    {
-      next: { revalidate: 600 }, // 600초 캐싱 (ISR)
-    }
+    `https://www.gamemarket.kr/api/trade?krgame=${krgame}&krserver=${krserver}&sort=${sort}&amount=${amount}&gubun=${gubun}`
+    // {
+    //   next: { revalidate: 600 }, // 600초 캐싱 (ISR)
+    // }
   );
 
   const trades = (await res?.json()) || [];

@@ -2,6 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { ChevronDown, Menu } from "lucide-react";
 import { gameMetadata, gameKeywords, gameTradeUrl } from "@/util/constants";
+import TradeLinkButton from "@/components/TradeLinkButton";
 
 // 동적 메타데이터 생성
 export async function generateMetadata({ params }) {
@@ -65,6 +66,12 @@ export default async function layout({ children, params }) {
   // 게임별 거래목록 기본 URL
   const tradeUrl = gameTradeUrl[game] || gameTradeUrl.aion2;
 
+  // 거래목록 링크 가져오기 (gameKeywords에서 trade 항목 찾기)
+  const tradeListKeyword = keywordsWithHref.find(
+    (item) => item.value === "trade"
+  );
+  const tradeListUrl = tradeListKeyword ? tradeListKeyword.href : tradeUrl;
+
   return (
     <>
       <header className="max-w-[1280px] mx-auto absolute top-0 left-1/2 transform -translate-x-1/2 w-full flex justify-between items-center py-6 z-10 px-7 lg:px-0">
@@ -95,7 +102,9 @@ export default async function layout({ children, params }) {
               <li className="join-item border border-base-300">
                 <details className="collapse collapse-arrow">
                   <summary className="collapse-title">
-                    <a href={tradeUrl}>거래목록</a>{" "}
+                    <TradeLinkButton href={tradeListUrl}>
+                      거래목록
+                    </TradeLinkButton>
                     <ChevronDown className="inline-block ml-1" />
                   </summary>
                   <ul className="collapse-content text-sm pl-4">

@@ -1,7 +1,7 @@
 import { DollarSign } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
-import { gamePageConfig, gameTradeUrl } from "@/util/constants";
+import { gamePageConfig, gameTradeUrl, gameKeywords } from "@/util/constants";
 
 export default async function GamePage({ params }) {
   const { game } = await params;
@@ -9,6 +9,15 @@ export default async function GamePage({ params }) {
   // 게임별 설정 가져오기 (없으면 aion2 기본값)
   const config = gamePageConfig[game] || gamePageConfig.aion2;
   const tradeUrl = gameTradeUrl[game] || gameTradeUrl.aion2;
+
+  // 거래목록 링크 가져오기
+  const keywords = gameKeywords[game] || gameKeywords.aion2 || [];
+  const tradeListKeyword = keywords.find((item) => item.value === "trade");
+  const tradeListUrl = tradeListKeyword
+    ? typeof tradeListKeyword.href === "function"
+      ? tradeListKeyword.href(game)
+      : tradeListKeyword.href
+    : tradeUrl;
 
   const characters = Array.from({ length: 6 }, (_, i) => `/cha${i + 1}.webp`);
   const items = Array.from({ length: 5 }, (_, i) => `/item${i + 1}.webp`);
@@ -47,13 +56,15 @@ export default async function GamePage({ params }) {
             {config.heroSubtitle}
             <br /> {config.heroDescription}
           </p>
-          <Link
-            href={tradeUrl}
-            className="flex xl:text-lg shiny-btn justify-center gap-1 items-center cursor-pointer xl:min-w-[350px] text-sm bg-[#dea700] my-6 font-semibold px-8 py-3 transition text-black"
-          >
-            {config.tradeButtonText}
-            <DollarSign size={20} className="mb-0.5" />
-          </Link>
+          <div className="flex flex-col xl:flex-row gap-4 items-center">
+            <Link
+              href={tradeUrl}
+              className="flex xl:text-lg shiny-btn justify-center gap-1 items-center cursor-pointer xl:min-w-[350px] text-sm bg-[#dea700] my-6 font-semibold px-8 py-3 transition text-black"
+            >
+              {config.tradeButtonText}
+              <DollarSign size={20} className="mb-0.5" />
+            </Link>
+          </div>
         </div>
 
         {/* 상품 박스 */}
