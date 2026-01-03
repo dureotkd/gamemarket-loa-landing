@@ -3,8 +3,8 @@ import Image from "next/image";
 import Link from "next/link";
 import { gamePageConfig, gameTradeUrl } from "@/util/constants";
 
-export default function GamePage({ params }) {
-  const { game } = params;
+export default async function GamePage({ params }) {
+  const { game } = await params;
 
   // 게임별 설정 가져오기 (없으면 aion2 기본값)
   const config = gamePageConfig[game] || gamePageConfig.aion2;

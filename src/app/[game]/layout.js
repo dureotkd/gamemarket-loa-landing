@@ -5,7 +5,7 @@ import { gameMetadata, gameKeywords, gameTradeUrl } from "@/util/constants";
 
 // 동적 메타데이터 생성
 export async function generateMetadata({ params }) {
-  const { game } = params;
+  const { game } = await params;
   const metadata = gameMetadata[game] || gameMetadata.aion2; // 기본값은 aion2
 
   return {
@@ -50,8 +50,8 @@ export async function generateMetadata({ params }) {
   };
 }
 
-export default function layout({ children, params }) {
-  const { game } = params;
+export default async function layout({ children, params }) {
+  const { game } = await params;
 
   // 게임별 키워드 가져오기 (없으면 빈 배열)
   const keywords = gameKeywords[game] || gameKeywords.aion2 || [];
