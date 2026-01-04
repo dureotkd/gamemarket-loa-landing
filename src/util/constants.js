@@ -4,6 +4,7 @@ export const gameTitleMap = {
   sp: "서든어택",
   dp: "던전앤파이터",
   lostark: "로스트아크",
+  lineage: "리니지클래식",
 };
 
 // trade?gm=15&sv=112&krgame=메이플스토리&krserver=전체서버&type=sell
@@ -13,6 +14,7 @@ export const gameCodeMap = {
   sp: 17,
   dp: 16,
   lostark: 14,
+  lineage: 69,
 };
 
 // 게임별 메타데이터 설정
@@ -127,6 +129,31 @@ export const gameMetadata = {
     twitterTitle: "던파골드거래소",
     twitterDescription: "던전앤파이터 아이템 거래, 안전한 거래 플랫폼",
   },
+  lineage: {
+    title: "리니지클래식아덴거래소 | 빠르고 안전한 리니지클래식 아이템 거래",
+    description:
+      "리니지클래식아덴거래소 - 24시간 안전하고 빠른 리니지클래식 아이템, 골드, 계정 거래 플랫폼",
+    keywords: [
+      "리니지",
+      "리니지클래식",
+      "리니지클래식아덴",
+      "리니지클래식아덴거래",
+      "리니지클래식아덴 거래소",
+      "리니지클래식아덴 구매",
+      "리니지클래식아덴 판매",
+      "리니지클래식계정거래",
+      "리니지클래식아이템",
+      "리니지클래식거래사이트",
+      "리니지클래식아이템 판매",
+    ],
+    canonical: "https://www.chanong.kr/lineage",
+    ogTitle: "리니지클래식아덴거래소",
+    ogDescription:
+      "리니지클래식아덴거래소 - 24시간 안전하고 빠른 리니지클래식 아이템, 골드, 계정 거래 플랫폼",
+    ogUrl: "https://www.chanong.kr/lineage",
+    twitterTitle: "리니지클래식아덴거래소",
+    twitterDescription: "리니지클래식 아이템 거래, 안전한 거래 플랫폼",
+  },
 };
 
 // 게임별 거래목록 기본 URL
@@ -135,6 +162,7 @@ export const gameTradeUrl = {
   land: "/trade?gidx=3&krgame=메이플스토리월드&game=land",
   sp: "/trade?gidx=17&krgame=서든어택&game=sp",
   dp: "/trade?gidx=16&krgame=던전앤파이터&game=dp",
+  lineage: "/trade?gidx=69&krgame=리니지클래식&game=lineage",
 };
 
 // 게임별 네비게이션 키워드 설정
@@ -295,6 +323,44 @@ export const gameKeywords = {
       href: (game) => `/${game}/mobile-price`,
     },
   ],
+  lineage: [
+    {
+      label: "거래목록",
+      value: "trade",
+      href: (game) =>
+        `https://www.gamemarket.kr/page/trade?gm=${gameCodeMap.lineage}&sv=0&krgame=리니지클래식&krserver=전체서버&type=sell`,
+    },
+    {
+      label: "리니지클래식아덴",
+      value: "gold",
+      href: (game) => `/${game}/gold`,
+    },
+    {
+      label: "리니지클래식아덴거래",
+      value: "lineage-gold",
+      href: (game) => `/${game}/gold`,
+    },
+    {
+      label: "리니지클래식시세",
+      value: "lineage-gold-price",
+      href: (game) => `/${game}/gold-price`,
+    },
+    {
+      label: "리니지클래식아덴시세",
+      value: "lineage-gold-price-detail",
+      href: (game) => `/${game}/gold-price`,
+    },
+    {
+      label: "리니지클래식레이드아덴",
+      value: "lineage-raid-gold",
+      href: (game) => `/${game}/raid-gold`,
+    },
+    {
+      label: "리니지클래식현질",
+      value: "lineage-cash",
+      href: (game) => `/${game}/cash`,
+    },
+  ],
 };
 
 // 게임별 페이지 설정
@@ -389,6 +455,29 @@ export const gamePageConfig = {
       { title: "던파골드구매", percent: 16.33 },
       { title: "던파현질", percent: 16.33 },
       { title: "던파누적현질", percent: 30.0 },
+    ],
+  },
+  lineage: {
+    gameName: "리니지클래식",
+    currencyName: "아덴",
+    currencyDisplay: "리니지클래식아덴",
+    tradeButtonText: "아덴 거래하기",
+    heroImage: "/lineage/1.png",
+    heroTitle: "아이템 판매/구매를 안전하게",
+    heroSubtitle: "지금 리니지클래식 아이템 거래를 통해",
+    heroDescription: "게임 경험을 한 단계 끌어올리세요",
+    productTitle: "리니지클래식아덴 거래소",
+    productAlt: "리니지클래식아덴",
+    statsTitle: "리니지클래식 아이템거래",
+    rankingTitle: "리니지클래식 랭킹",
+    stats: [
+      { title: "리니지클래식아덴", percent: 30.0 },
+      { title: "리니지클래식아덴", percent: 9.5 },
+      { title: "리니지클래식아덴시세", percent: 10.0 },
+      { title: "리니지클래식아덴판매", percent: 12.0 },
+      { title: "리니지클래식아덴구매", percent: 16.33 },
+      { title: "리니지클래식현질", percent: 16.33 },
+      { title: "리니지클래식누적현질", percent: 30.0 },
     ],
   },
 };

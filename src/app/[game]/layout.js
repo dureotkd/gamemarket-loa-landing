@@ -206,6 +206,30 @@ export default async function layout({ children, params }) {
               ))}
             </ul>
           </div>
+          <div className="dropdown dropdown-bottom dropdown-end dropdown-hover">
+            <a href="#" className="flex cursor-pointer items-center gap-1">
+              <span>거래소</span>
+              <ChevronDown />
+            </a>
+            <ul className="dropdown-content menu bg-base-100 rounded-box z-1 w-52 p-2 shadow-sm">
+              {[
+                { label: "로스트아크", value: "lostark", href: "/" },
+                { label: "메이플랜드", value: "land", href: "/land" },
+                { label: "던전앤파이터", value: "dp", href: "/dp" },
+                { label: "서든어택", value: "sp", href: "/sp" },
+                { label: "리니지클래식", value: "lineage", href: "/lineage" },
+              ].map((item) => (
+                <li key={item.value}>
+                  <Link
+                    href={item.href}
+                    className="hover:text-yellow-400 transition-colors duration-200"
+                  >
+                    {item.label}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </div>
           <Link href={`/${game}/news`}>게임정보</Link>
         </nav>
       </header>
