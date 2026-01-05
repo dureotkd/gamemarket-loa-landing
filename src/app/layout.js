@@ -79,9 +79,13 @@ export default function RootLayout({ children }) {
         name="viewport"
         content="width=device-width, initial-scale=1.0, user-scalable=0"
       />
-      <meta
+      {/* <meta
         name="naver-site-verification"
         content="28c53da9b72f75044881dfa8eede983a815cef51"
+      /> */}
+      <meta
+        name="naver-site-verification"
+        content="c2ab2b6e77b38884ff838bcd1f152a6e819ab5f9"
       />
 
       <body
