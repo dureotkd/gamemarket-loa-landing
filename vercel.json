@@ -1,3 +1,28 @@
 {
-  "redirects": []
+  "redirects": [
+    {
+      "source": "/(.*)",
+      "has": [{ "type": "host", "value": "dp.chanong.co.kr" }],
+      "destination": "https://www.chanong.co.kr/dp/$1",
+      "permanent": true
+    },
+    {
+      "source": "/(.*)",
+      "has": [{ "type": "host", "value": "land.chanong.co.kr" }],
+      "destination": "https://www.chanong.co.kr/land/$1",
+      "permanent": true
+    },
+    {
+      "source": "/(.*)",
+      "has": [{ "type": "host", "value": "lineage.chanong.co.kr" }],
+      "destination": "https://www.chanong.co.kr/lineage/$1",
+      "permanent": true
+    },
+    {
+      "source": "/(.*)",
+      "has": [{ "type": "host", "value": "sp.chanong.co.kr" }],
+      "destination": "https://www.chanong.co.kr/sp/$1",
+      "permanent": true
+    }
+  ]
 }
