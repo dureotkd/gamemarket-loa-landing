@@ -1,0 +1,14 @@
+{
+  "rewrites": [
+    {
+      "source": "/(.*)",
+      "has": [
+        {
+          "type": "host",
+          "value": "dp.chanong.co.kr"
+        }
+      ],
+      "destination": "/dp/$1"
+    }
+  ]
+}
