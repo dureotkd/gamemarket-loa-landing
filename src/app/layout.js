@@ -87,9 +87,13 @@ export default function RootLayout({ children }) {
         name="naver-site-verification"
         content="c2ab2b6e77b38884ff838bcd1f152a6e819ab5f9"
       /> */}
-      <meta
+      {/* <meta
         name="naver-site-verification"
         content="f9ca70966fcffa68871e2ed45b5d20003f639c98"
+      /> */}
+      <meta
+        name="naver-site-verification"
+        content="a002d2692207367e3469074c396d01b388740e18"
       />
 
       <body
