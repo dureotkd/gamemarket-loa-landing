@@ -5,13 +5,27 @@ import React from "react";
 
 async function NewsContent({ page = 1, game = "" }) {
   const gameName = gameTitleMap[game] || "";
-  const res = await fetch(
-    `https://www.gamemarket.kr/api/news?page=${page}&game_name=${gameName}`,
-    {
-      next: { revalidate: 60 }, // 60초 캐싱 (ISR)
+  let news = [];
+  try {
+    const res = await fetch(
+      `https://www.gamemarket.kr/api/news?page=${encodeURIComponent(
+        page
+      )}&game_name=${encodeURIComponent(gameName)}`,
+      {
+        next: { revalidate: 60 }, // 60초 캐싱 (ISR)
+      }
+    );
+
+    const contentType = res.headers.get("content-type") || "";
+    if (!res.ok || !contentType.includes("application/json")) {
+      news = [];
+    } else {
+      const data = await res.json();
+      news = Array.isArray(data) ? data : [];
     }
-  );
-  const news = await res.json();
+  } catch {
+    news = [];
+  }
   const recent_news = news.slice(0, 5); // 최근 게시물 5개
 
   return (
