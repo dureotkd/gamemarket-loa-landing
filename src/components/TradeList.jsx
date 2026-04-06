@@ -12,7 +12,7 @@ async function TradeList({
   console.log(krgame, krserver, sort, amount, gubun);
   // ✅ 서버에서 바로 실행됨
   const res = await fetch(
-    `https://www.gamemarket.kr/api/trade?krgame=${krgame}&krserver=${krserver}&sort=${sort}&amount=${amount}&gubun=${gubun}`
+    `https://www.gamemarket.kr/api/trade?krgame=${krgame}&krserver=${krserver}&sort=${sort}&amount=${amount}&gubun=${gubun}`,
     // {
     //   next: { revalidate: 600 }, // 600초 캐싱 (ISR)
     // }
@@ -22,7 +22,7 @@ async function TradeList({
 
   return trades.length === 0 ? (
     <div className="col-span-2 text-center text-gray-400 py-12">
-      거래가 존재하지 않습니다.
+      거래가 존재하지 않습니다
     </div>
   ) : (
     trades.map((item, i) => (
