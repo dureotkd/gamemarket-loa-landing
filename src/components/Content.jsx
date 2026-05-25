@@ -1,6 +1,8 @@
 import React from "react";
+import Link from "next/link";
+import { DollarSign } from "lucide-react";
 
-function Content({ name = "" }) {
+function Content({ name = "", tradeHref, tradeButtonText = "골드 거래하기" }) {
   const stats = [
     { value: "₩7,458,163.54", label: "전체 거래 금액" },
     { value: "82%", label: "거래성공률" },
@@ -27,6 +29,15 @@ function Content({ name = "" }) {
             <h2 className="text-[#dea700] ml-1 inline-block">› {name}</h2>
           </div>
           <h1 className="text-4xl font-bold">{name}</h1>
+          {tradeHref ? (
+            <Link
+              href={tradeHref}
+              className="shiny-btn mt-6 inline-flex min-h-12 items-center justify-center gap-2 bg-[#dea700] px-8 py-3 text-sm font-semibold text-black transition hover:bg-[#f0c032] sm:text-base"
+            >
+              {tradeButtonText}
+              <DollarSign size={18} className="mb-0.5" />
+            </Link>
+          ) : null}
         </div>
       </section>
 
